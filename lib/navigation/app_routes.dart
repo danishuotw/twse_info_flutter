@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:twse_info_flutter/navigation/app_navigator.dart';
-import 'package:twse_info_flutter/presentation/launch/launch_screen.dart';
+import 'package:twse_info_flutter/presentation/home/home_screen.dart';
 
 String makePath(String path, String subPath) => '$path/$subPath'.replaceAll('//', '/');
 
@@ -25,6 +25,6 @@ class RootRoute {
   RootRoute(this.path)
       : goRoute = GoRoute(
           path: path,
-          builder: (BuildContext context, GoRouterState state) => const LaunchScreen(),
+          builder: (BuildContext context, GoRouterState state) => const HomeScreen(),
         );
 }
