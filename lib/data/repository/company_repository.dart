@@ -21,10 +21,11 @@ class _CompanyRepository implements CompanyRepository {
   _CompanyRepository._internal();
 
   @override
-  Map<String, List<CompanyModel>>? companyMap;
+  Map<String, List<CompanyModel>>? companyMap; // Cache
 
   @override
   Future<DataState<Map<String, List<CompanyModel>>>> fetchData() async {
+    if (companyMap != null) return Future.value(DataSuccess(companyMap));
     final response = await http.get(Uri.parse('${ApiConfig.baseURL}/opendata/t187ap03_P'));
     try {
       if (response.statusCode == HttpStatus.ok) {
