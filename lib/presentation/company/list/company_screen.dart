@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:twse_info_flutter/app/widgets/app_bar.dart';
 import 'package:twse_info_flutter/presentation/company/detail/company_detail_screen.dart';
-import 'package:twse_info_flutter/presentation/company/widgets/company_tile.dart';
+import 'package:twse_info_flutter/presentation/company/list/widgets/company_tile.dart';
 
 class CompanyScreen extends StatelessWidget {
   const CompanyScreen({Key? key}) : super(key: key);
