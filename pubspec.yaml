@@ -41,6 +41,15 @@ dependencies:
   # Architecture
   stacked: ^2.3.8
 
+  # Network
+  http: ^0.13.5
+
+  # Tool
+  collection: ^1.17.0
+
+  # DI
+  get_it: ^7.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
