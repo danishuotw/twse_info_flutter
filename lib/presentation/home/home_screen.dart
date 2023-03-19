@@ -3,6 +3,8 @@ import 'package:stacked/stacked.dart';
 import 'package:twse_info_flutter/presentation/home/home_view_model.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const route = '/home';
+
   const HomeScreen({Key? key}) : super(key: key);
 
   @override

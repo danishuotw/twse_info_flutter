@@ -4,7 +4,7 @@ import 'package:twse_info_flutter/app/di/injector.dart';
 import 'package:twse_info_flutter/data/remote/data_state.dart';
 import 'package:twse_info_flutter/data/repository/company_repository.dart';
 
-class LaunchViewModel extends ChangeNotifier {
+class IndustriesViewModel extends ChangeNotifier {
   final CompanyRepository _companyRepository = injector<CompanyRepository>();
 
   ViewState viewState = ViewState(state: ResponseState.EMPTY);
@@ -18,7 +18,8 @@ class LaunchViewModel extends ChangeNotifier {
     _setViewState(ViewState.loading());
     final companies = await _companyRepository.fetchData();
     if (companies is DataSuccess) {
-      _setViewState(ViewState.complete(companies.data));
+      final list = companies.data?.entries.toList();
+      _setViewState(ViewState.complete(list));
     }
     if (companies is DataFailed) {
       final error = companies.error;

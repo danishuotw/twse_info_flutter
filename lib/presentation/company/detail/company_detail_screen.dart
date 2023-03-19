@@ -4,7 +4,11 @@ import 'package:twse_info_flutter/app/widgets/app_divider.dart';
 import 'package:twse_info_flutter/presentation/company/detail/widgets/company_label_text.dart';
 
 class CompanyDetailScreen extends StatefulWidget {
-  const CompanyDetailScreen({Key? key}) : super(key: key);
+  static const route = '/companies/companyId';
+
+  final String companyId;
+
+  const CompanyDetailScreen({Key? key, required this.companyId}) : super(key: key);
 
   @override
   State<CompanyDetailScreen> createState() => _CompanyDetailScreenState();

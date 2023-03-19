@@ -1,15 +1,20 @@
 import 'package:flutter/foundation.dart';
 import 'package:twse_info_flutter/app/base/view_state.dart';
 import 'package:twse_info_flutter/app/di/injector.dart';
+import 'package:twse_info_flutter/data/model/remote/company/company_model.dart';
 import 'package:twse_info_flutter/data/remote/data_state.dart';
 import 'package:twse_info_flutter/data/repository/company_repository.dart';
 
-class LaunchViewModel extends ChangeNotifier {
+class CompaniesViewModel extends ChangeNotifier {
   final CompanyRepository _companyRepository = injector<CompanyRepository>();
 
-  ViewState viewState = ViewState(state: ResponseState.EMPTY);
+  final String id;
 
-  void _setViewState(ViewState viewState) {
+  ViewState<List<CompanyModel>> viewState = ViewState(state: ResponseState.EMPTY);
+
+  CompaniesViewModel({required this.id});
+
+  void _setViewState(ViewState<List<CompanyModel>> viewState) {
     this.viewState = viewState;
     notifyListeners();
   }
@@ -18,7 +23,8 @@ class LaunchViewModel extends ChangeNotifier {
     _setViewState(ViewState.loading());
     final companies = await _companyRepository.fetchData();
     if (companies is DataSuccess) {
-      _setViewState(ViewState.complete(companies.data));
+      final list = companies.data?[id] ?? List.empty();
+      _setViewState(ViewState.complete(list));
     }
     if (companies is DataFailed) {
       final error = companies.error;

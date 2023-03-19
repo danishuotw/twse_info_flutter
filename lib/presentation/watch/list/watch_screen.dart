@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:twse_info_flutter/app/widgets/app_bar.dart';
-import 'package:twse_info_flutter/presentation/company/list/company_screen.dart';
+import 'package:twse_info_flutter/presentation/company/list/companies_screen.dart';
 import 'package:twse_info_flutter/presentation/company/list/widgets/company_tile.dart';
 
 class WatchScreen extends StatefulWidget {
@@ -37,7 +37,9 @@ class _WatchScreenState extends State<WatchScreen> {
               Navigator.push(
                 context,
                 CupertinoPageRoute(
-                  builder: (BuildContext context) => CompanyScreen(),
+                  builder: (BuildContext context) => CompaniesScreen(
+                    industryId: '',
+                  ),
                 ),
               );
             },
