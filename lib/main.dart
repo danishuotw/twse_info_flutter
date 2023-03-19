@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:twse_info_flutter/app/di/injector.dart';
 import 'package:twse_info_flutter/navigation/app_routes.dart';
 
-void main() {
+void main() async {
+  await initializeDependencies();
+
   runApp(const MyApp());
 }
 
