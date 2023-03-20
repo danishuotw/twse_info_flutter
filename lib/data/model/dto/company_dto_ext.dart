@@ -6,6 +6,7 @@ extension CompanyDtoEx on CompanyModel {
     return CompanyDto(
       companyCode,
       companyName,
+      companyAbbreviation,
       industry,
       establishmentDate,
       listedDate,

@@ -3,6 +3,7 @@ typedef CompanyDtoMap = Map<String, List<CompanyDto>>;
 class CompanyDto {
   final String? id; // 公司代號
   final String? name; // 公司名稱
+  final String? abbr; // 公司簡稱
   final String? industry; // 產業別
   final String? establishmentDate; // 成立日期
   final String? listedDate; // 上市日期
@@ -19,6 +20,7 @@ class CompanyDto {
   CompanyDto(
     this.id,
     this.name,
+    this.abbr,
     this.industry,
     this.establishmentDate,
     this.listedDate,
