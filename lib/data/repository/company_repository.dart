@@ -13,6 +13,7 @@ import 'package:twse_info_flutter/data/remote/data_state.dart';
 abstract class CompanyRepository {
   Future<DataState<Map<String, List<CompanyDto>>>> fetchData();
   Future<DataState<CompanyDto>> getCompany(String id);
+  Future<DataState<List<CompanyDto>>> getCompanies();
 
   Map<String, CompanyDto>? companyMap;
   Map<String, List<CompanyDto>>? industryMap;
@@ -52,6 +53,7 @@ class _CompanyRepository implements CompanyRepository {
     }
   }
 
+  @override
   Future<DataState<CompanyDto>> getCompany(String id) async {
     if (companyMap != null) return Future.value(DataSuccess(companyMap![id]));
     if (companies.isNotEmpty) {
@@ -62,6 +64,7 @@ class _CompanyRepository implements CompanyRepository {
     }
   }
 
+  @override
   Future<DataState<List<CompanyDto>>> getCompanies() async {
     final response = await http.get(Uri.parse('${ApiConfig.baseURL}/opendata/t187ap03_P'));
     try {

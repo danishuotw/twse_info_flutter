@@ -1,37 +1,38 @@
 enum IndustryType {
-  cement(01),
-  electricalCable(06),
-  steel(10),
-  optoelectronics(26),
-  informationServices(30),
-  tradeDepartmentStore(18),
-  food(02),
-  chemical(21),
-  rubber(11),
-  electronicComponents(28),
-  buildingMaterialsConstruction(14),
-  oilElectricityAndGas(23),
-  plastic(03),
-  biotechnologyAndMedical(22),
-  automotive(12),
-  electronicDistribution(29),
-  shipping(15),
-  comprehensive(19),
-  textileFibers(04),
-  glassCeramics(08),
-  semiconductor(24),
-  otherElectronics(31),
-  tourism(16),
-  other(20),
-  electricalMachinery(05),
-  paper(09),
-  computerAndPeripheralEquipment(25),
-  communicationNetwork(27),
-  financial(17),
-  manageStocks(80);
+  none('XX'),
+  cement('01'),
+  electricalCable('06'),
+  steel('10'),
+  optoelectronics('26'),
+  informationServices('30'),
+  tradeDepartmentStore('18'),
+  food('02'),
+  chemical('21'),
+  rubber('11'),
+  electronicComponents('28'),
+  buildingMaterialsConstruction('14'),
+  oilElectricityAndGas('23'),
+  plastic('03'),
+  biotechnologyAndMedical('22'),
+  automotive('12'),
+  electronicDistribution('29'),
+  shipping('15'),
+  comprehensive('19'),
+  textileFibers('04'),
+  glassCeramics('08'),
+  semiconductor('24'),
+  otherElectronics('31'),
+  tourism('16'),
+  other('20'),
+  electricalMachinery('05'),
+  paper('09'),
+  computerAndPeripheralEquipment('25'),
+  communicationNetwork('27'),
+  financial('17'),
+  manageStocks('80');
 
   const IndustryType(this.value);
-  final num value;
+  final String value;
 
   static IndustryType fromValue(String value) {
     switch (value) {
@@ -96,7 +97,7 @@ enum IndustryType {
       case '80':
         return IndustryType.manageStocks;
       case 'XX':
-        return IndustryType.other;
+        return IndustryType.none;
       default:
         return IndustryType.other;
     }
@@ -106,6 +107,8 @@ enum IndustryType {
 extension IndustryTypeEx on IndustryType {
   String name() {
     switch (this) {
+      case IndustryType.none:
+        return '無分類';
       case IndustryType.cement:
         return '水泥工業';
       case IndustryType.electricalCable:
