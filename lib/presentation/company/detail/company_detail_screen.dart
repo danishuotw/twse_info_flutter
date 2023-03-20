@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 import 'package:twse_info_flutter/app/widgets/app_bar.dart';
 import 'package:twse_info_flutter/app/widgets/app_divider.dart';
 import 'package:twse_info_flutter/presentation/company/detail/widgets/company_label_text.dart';
 
 class CompanyDetailScreen extends StatefulWidget {
-  static const route = '/companies/companyId';
+  static const route = '/companyDetail/:companyId';
 
   final String companyId;
 
-  const CompanyDetailScreen({Key? key, required this.companyId}) : super(key: key);
+  const CompanyDetailScreen({
+    Key? key,
+    required this.companyId,
+  }) : super(key: key);
 
   @override
   State<CompanyDetailScreen> createState() => _CompanyDetailScreenState();
@@ -16,26 +20,29 @@ class CompanyDetailScreen extends StatefulWidget {
 
 class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: const AppNavBar(
-          title: '公司簡介',
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              children: [
-                _buildTitleWidget(),
-                _buildInfoWidget(),
-                const AppDivider(),
-                _buildContactWidget(),
-                const AppDivider(),
-                _buildICapitalWidget(),
-              ],
+  Widget build(BuildContext context) => ViewModelBuilder.reactive(viewModelBuilder: () => , ,
+      builder: (context, model, child) {
+        return Scaffold(
+          appBar: const AppNavBar(
+            title: '公司簡介',
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                children: [
+                  _buildTitleWidget(),
+                  _buildInfoWidget(),
+                  const AppDivider(),
+                  _buildContactWidget(),
+                  const AppDivider(),
+                  _buildICapitalWidget(),
+                ],
+              ),
             ),
           ),
-        ),
-      );
+        );
+      });
 
   Widget _buildTitleWidget() => Padding(
         padding: const EdgeInsets.only(bottom: 20.0),

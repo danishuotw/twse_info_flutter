@@ -30,6 +30,12 @@ class CompaniesScreen extends StatelessWidget {
         ),
       );
 
+  AppNavBar _buildAppBar(CompaniesViewModel viewModel) {
+    return const AppNavBar(
+      title: '公司',
+    );
+  }
+
   Widget _buildBody(BuildContext context, CompaniesViewModel viewModel) {
     switch (viewModel.viewState.state) {
       case ResponseState.LOADING:
@@ -50,22 +56,16 @@ class CompaniesScreen extends StatelessWidget {
       itemBuilder: (context, index) {
         final item = items[index];
         return CompanyListTile(
-          onTap: () => _navigateDetail(context, ''),
-          number: item.companyCode,
-          title: item.companyName,
+          onTap: () => _navigateDetail(context, item.id),
+          number: item.id ?? '',
+          title: item.name ?? '',
         );
       },
       separatorBuilder: (context, index) => const Divider(),
     );
   }
 
-  AppNavBar _buildAppBar(CompaniesViewModel viewModel) {
-    return const AppNavBar(
-      title: '公司',
-    );
-  }
-
-  void _navigateDetail(BuildContext context, String id) {
-    context.goNamed(CompanyDetailScreen.route, params: {'companyId': id});
+  void _navigateDetail(BuildContext context, String? id) {
+    context.pushNamed(CompanyDetailScreen.route, params: {'companyId': '$id'});
   }
 }

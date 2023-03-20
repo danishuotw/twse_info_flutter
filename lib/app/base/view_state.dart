@@ -1,3 +1,4 @@
+// ignore: constant_identifier_names
 enum ResponseState { EMPTY, LOADING, COMPLETE, ERROR }
 
 class ViewState<T> {
