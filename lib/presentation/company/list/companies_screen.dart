@@ -6,6 +6,7 @@ import 'package:twse_info_flutter/app/widgets/app_bar.dart';
 import 'package:twse_info_flutter/app/widgets/app_empty_screen.dart';
 import 'package:twse_info_flutter/app/widgets/app_error_screen.dart';
 import 'package:twse_info_flutter/app/widgets/app_loading_screen.dart';
+import 'package:twse_info_flutter/data/model/dto/industry_type.dart';
 import 'package:twse_info_flutter/presentation/company/detail/company_detail_screen.dart';
 import 'package:twse_info_flutter/presentation/company/list/companies_view_model.dart';
 import 'package:twse_info_flutter/presentation/company/list/widgets/company_tile.dart';
@@ -31,8 +32,8 @@ class CompaniesScreen extends StatelessWidget {
       );
 
   AppNavBar _buildAppBar(CompaniesViewModel viewModel) {
-    return const AppNavBar(
-      title: '公司',
+    return AppNavBar(
+      title: IndustryType.fromValue(industryId).name(),
     );
   }
 
