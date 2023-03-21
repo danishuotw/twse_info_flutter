@@ -17,6 +17,7 @@ class CompanyEntities extends Table {
   TextColumn get address => text().nullable()(); // 地址
   TextColumn get unifiedNumber => text().nullable()(); // 營利事業統一編號
   TextColumn get paidInCapital => text().nullable()(); // 實收資本額
+  TextColumn get privateShares => text().nullable()(); // 私募股數
   TextColumn get specialStock => text().nullable()(); // 特別股
   TextColumn get parValue => text().nullable()(); // 普通股每股面額
   TextColumn get url => text().nullable()(); // 網址
@@ -39,7 +40,7 @@ abstract class FavouriteLocalDataSource {
 
 @DriftAccessor(tables: [CompanyEntities])
 class FavouriteEntityDao extends DatabaseAccessor<AppDatabase>
-    with _$CompanyEntityDaoMixin
+    with _$FavouriteEntityDaoMixin
     implements FavouriteLocalDataSource {
   final AppDatabase db;
 
@@ -47,7 +48,7 @@ class FavouriteEntityDao extends DatabaseAccessor<AppDatabase>
 
   @override
   Future<int> deleteCompany(String id) {
-    return (delete(companyEntities)..where((t) => t.id.isSmallerThanValue(id))).go();
+    return (delete(companyEntities)..where((t) => t.id.equals(id))).go();
   }
 
   @override
@@ -67,6 +68,6 @@ class FavouriteEntityDao extends DatabaseAccessor<AppDatabase>
 
   @override
   Future<CompanyEntity?> getById(String id) {
-    return (select(companyEntities)..where((tbl) => tbl.id.equals(id))).getSingle();
+    return (select(companyEntities)..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
   }
 }

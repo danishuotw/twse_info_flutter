@@ -13,6 +13,7 @@ class CompanyDto {
   final String? address; // 地址
   final String? unifiedNumber; // 營利事業統一編號
   final String? paidInCapital; // 實收資本額
+  final String? privateShares; // 私募股數
   final String? specialStock; // 特別股
   final String? parValue; // 普通股每股面額
   final String? url; // 網址
@@ -30,6 +31,7 @@ class CompanyDto {
     this.address,
     this.unifiedNumber,
     this.paidInCapital,
+    this.privateShares,
     this.specialStock,
     this.parValue,
     this.url,

@@ -45,6 +45,7 @@ dependencies:
   http: ^0.13.5
 
   # Tool
+  intl: ^0.18.0
   collection: ^1.17.0
   url_launcher: ^6.1.10
 

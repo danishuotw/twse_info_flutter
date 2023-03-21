@@ -3,6 +3,6 @@
 part of 'local_data_source.dart';
 
 // ignore_for_file: type=lint
-mixin _$CompanyEntityDaoMixin on DatabaseAccessor<AppDatabase> {
+mixin _$FavouriteEntityDaoMixin on DatabaseAccessor<AppDatabase> {
   $CompanyEntitiesTable get companyEntities => attachedDatabase.companyEntities;
 }

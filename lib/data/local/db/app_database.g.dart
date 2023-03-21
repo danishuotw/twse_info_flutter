@@ -78,6 +78,12 @@ class $CompanyEntitiesTable extends CompanyEntities
   late final GeneratedColumn<String> paidInCapital = GeneratedColumn<String>(
       'paid_in_capital', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _privateSharesMeta =
+      const VerificationMeta('privateShares');
+  @override
+  late final GeneratedColumn<String> privateShares = GeneratedColumn<String>(
+      'private_shares', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _specialStockMeta =
       const VerificationMeta('specialStock');
   @override
@@ -109,6 +115,7 @@ class $CompanyEntitiesTable extends CompanyEntities
         address,
         unifiedNumber,
         paidInCapital,
+        privateShares,
         specialStock,
         parValue,
         url
@@ -181,6 +188,12 @@ class $CompanyEntitiesTable extends CompanyEntities
           paidInCapital.isAcceptableOrUnknown(
               data['paid_in_capital']!, _paidInCapitalMeta));
     }
+    if (data.containsKey('private_shares')) {
+      context.handle(
+          _privateSharesMeta,
+          privateShares.isAcceptableOrUnknown(
+              data['private_shares']!, _privateSharesMeta));
+    }
     if (data.containsKey('special_stock')) {
       context.handle(
           _specialStockMeta,
@@ -228,6 +241,8 @@ class $CompanyEntitiesTable extends CompanyEntities
           .read(DriftSqlType.string, data['${effectivePrefix}unified_number']),
       paidInCapital: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}paid_in_capital']),
+      privateShares: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}private_shares']),
       specialStock: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}special_stock']),
       parValue: attachedDatabase.typeMapping
@@ -256,6 +271,7 @@ class CompanyEntity extends DataClass implements Insertable<CompanyEntity> {
   final String? address;
   final String? unifiedNumber;
   final String? paidInCapital;
+  final String? privateShares;
   final String? specialStock;
   final String? parValue;
   final String? url;
@@ -272,6 +288,7 @@ class CompanyEntity extends DataClass implements Insertable<CompanyEntity> {
       this.address,
       this.unifiedNumber,
       this.paidInCapital,
+      this.privateShares,
       this.specialStock,
       this.parValue,
       this.url});
@@ -313,6 +330,9 @@ class CompanyEntity extends DataClass implements Insertable<CompanyEntity> {
     }
     if (!nullToAbsent || paidInCapital != null) {
       map['paid_in_capital'] = Variable<String>(paidInCapital);
+    }
+    if (!nullToAbsent || privateShares != null) {
+      map['private_shares'] = Variable<String>(privateShares);
     }
     if (!nullToAbsent || specialStock != null) {
       map['special_stock'] = Variable<String>(specialStock);
@@ -358,6 +378,9 @@ class CompanyEntity extends DataClass implements Insertable<CompanyEntity> {
       paidInCapital: paidInCapital == null && nullToAbsent
           ? const Value.absent()
           : Value(paidInCapital),
+      privateShares: privateShares == null && nullToAbsent
+          ? const Value.absent()
+          : Value(privateShares),
       specialStock: specialStock == null && nullToAbsent
           ? const Value.absent()
           : Value(specialStock),
@@ -385,6 +408,7 @@ class CompanyEntity extends DataClass implements Insertable<CompanyEntity> {
       address: serializer.fromJson<String?>(json['address']),
       unifiedNumber: serializer.fromJson<String?>(json['unifiedNumber']),
       paidInCapital: serializer.fromJson<String?>(json['paidInCapital']),
+      privateShares: serializer.fromJson<String?>(json['privateShares']),
       specialStock: serializer.fromJson<String?>(json['specialStock']),
       parValue: serializer.fromJson<String?>(json['parValue']),
       url: serializer.fromJson<String?>(json['url']),
@@ -406,6 +430,7 @@ class CompanyEntity extends DataClass implements Insertable<CompanyEntity> {
       'address': serializer.toJson<String?>(address),
       'unifiedNumber': serializer.toJson<String?>(unifiedNumber),
       'paidInCapital': serializer.toJson<String?>(paidInCapital),
+      'privateShares': serializer.toJson<String?>(privateShares),
       'specialStock': serializer.toJson<String?>(specialStock),
       'parValue': serializer.toJson<String?>(parValue),
       'url': serializer.toJson<String?>(url),
@@ -425,6 +450,7 @@ class CompanyEntity extends DataClass implements Insertable<CompanyEntity> {
           Value<String?> address = const Value.absent(),
           Value<String?> unifiedNumber = const Value.absent(),
           Value<String?> paidInCapital = const Value.absent(),
+          Value<String?> privateShares = const Value.absent(),
           Value<String?> specialStock = const Value.absent(),
           Value<String?> parValue = const Value.absent(),
           Value<String?> url = const Value.absent()}) =>
@@ -448,6 +474,8 @@ class CompanyEntity extends DataClass implements Insertable<CompanyEntity> {
             unifiedNumber.present ? unifiedNumber.value : this.unifiedNumber,
         paidInCapital:
             paidInCapital.present ? paidInCapital.value : this.paidInCapital,
+        privateShares:
+            privateShares.present ? privateShares.value : this.privateShares,
         specialStock:
             specialStock.present ? specialStock.value : this.specialStock,
         parValue: parValue.present ? parValue.value : this.parValue,
@@ -468,6 +496,7 @@ class CompanyEntity extends DataClass implements Insertable<CompanyEntity> {
           ..write('address: $address, ')
           ..write('unifiedNumber: $unifiedNumber, ')
           ..write('paidInCapital: $paidInCapital, ')
+          ..write('privateShares: $privateShares, ')
           ..write('specialStock: $specialStock, ')
           ..write('parValue: $parValue, ')
           ..write('url: $url')
@@ -489,6 +518,7 @@ class CompanyEntity extends DataClass implements Insertable<CompanyEntity> {
       address,
       unifiedNumber,
       paidInCapital,
+      privateShares,
       specialStock,
       parValue,
       url);
@@ -508,6 +538,7 @@ class CompanyEntity extends DataClass implements Insertable<CompanyEntity> {
           other.address == this.address &&
           other.unifiedNumber == this.unifiedNumber &&
           other.paidInCapital == this.paidInCapital &&
+          other.privateShares == this.privateShares &&
           other.specialStock == this.specialStock &&
           other.parValue == this.parValue &&
           other.url == this.url);
@@ -526,6 +557,7 @@ class CompanyEntitiesCompanion extends UpdateCompanion<CompanyEntity> {
   final Value<String?> address;
   final Value<String?> unifiedNumber;
   final Value<String?> paidInCapital;
+  final Value<String?> privateShares;
   final Value<String?> specialStock;
   final Value<String?> parValue;
   final Value<String?> url;
@@ -543,6 +575,7 @@ class CompanyEntitiesCompanion extends UpdateCompanion<CompanyEntity> {
     this.address = const Value.absent(),
     this.unifiedNumber = const Value.absent(),
     this.paidInCapital = const Value.absent(),
+    this.privateShares = const Value.absent(),
     this.specialStock = const Value.absent(),
     this.parValue = const Value.absent(),
     this.url = const Value.absent(),
@@ -561,6 +594,7 @@ class CompanyEntitiesCompanion extends UpdateCompanion<CompanyEntity> {
     this.address = const Value.absent(),
     this.unifiedNumber = const Value.absent(),
     this.paidInCapital = const Value.absent(),
+    this.privateShares = const Value.absent(),
     this.specialStock = const Value.absent(),
     this.parValue = const Value.absent(),
     this.url = const Value.absent(),
@@ -579,6 +613,7 @@ class CompanyEntitiesCompanion extends UpdateCompanion<CompanyEntity> {
     Expression<String>? address,
     Expression<String>? unifiedNumber,
     Expression<String>? paidInCapital,
+    Expression<String>? privateShares,
     Expression<String>? specialStock,
     Expression<String>? parValue,
     Expression<String>? url,
@@ -597,6 +632,7 @@ class CompanyEntitiesCompanion extends UpdateCompanion<CompanyEntity> {
       if (address != null) 'address': address,
       if (unifiedNumber != null) 'unified_number': unifiedNumber,
       if (paidInCapital != null) 'paid_in_capital': paidInCapital,
+      if (privateShares != null) 'private_shares': privateShares,
       if (specialStock != null) 'special_stock': specialStock,
       if (parValue != null) 'par_value': parValue,
       if (url != null) 'url': url,
@@ -617,6 +653,7 @@ class CompanyEntitiesCompanion extends UpdateCompanion<CompanyEntity> {
       Value<String?>? address,
       Value<String?>? unifiedNumber,
       Value<String?>? paidInCapital,
+      Value<String?>? privateShares,
       Value<String?>? specialStock,
       Value<String?>? parValue,
       Value<String?>? url,
@@ -634,6 +671,7 @@ class CompanyEntitiesCompanion extends UpdateCompanion<CompanyEntity> {
       address: address ?? this.address,
       unifiedNumber: unifiedNumber ?? this.unifiedNumber,
       paidInCapital: paidInCapital ?? this.paidInCapital,
+      privateShares: privateShares ?? this.privateShares,
       specialStock: specialStock ?? this.specialStock,
       parValue: parValue ?? this.parValue,
       url: url ?? this.url,
@@ -680,6 +718,9 @@ class CompanyEntitiesCompanion extends UpdateCompanion<CompanyEntity> {
     if (paidInCapital.present) {
       map['paid_in_capital'] = Variable<String>(paidInCapital.value);
     }
+    if (privateShares.present) {
+      map['private_shares'] = Variable<String>(privateShares.value);
+    }
     if (specialStock.present) {
       map['special_stock'] = Variable<String>(specialStock.value);
     }
@@ -710,6 +751,7 @@ class CompanyEntitiesCompanion extends UpdateCompanion<CompanyEntity> {
           ..write('address: $address, ')
           ..write('unifiedNumber: $unifiedNumber, ')
           ..write('paidInCapital: $paidInCapital, ')
+          ..write('privateShares: $privateShares, ')
           ..write('specialStock: $specialStock, ')
           ..write('parValue: $parValue, ')
           ..write('url: $url, ')
