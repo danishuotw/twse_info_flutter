@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:twse_info_flutter/app/base/view_state.dart';
+import 'package:twse_info_flutter/app/widgets/app_dialog.dart';
 import 'package:twse_info_flutter/app/widgets/app_divider.dart';
 import 'package:twse_info_flutter/app/widgets/app_empty_screen.dart';
 import 'package:twse_info_flutter/app/widgets/app_error_screen.dart';
@@ -27,22 +28,55 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
   @override
   Widget build(BuildContext context) => ViewModelBuilder.reactive(
         viewModelBuilder: () => CompanyDetailViewModel(id: widget.companyId),
-        onModelReady: (model) => model.fetchData(),
+        onModelReady: (model) {
+          model.fetchData();
+          model.getFavourite();
+        },
         builder: (context, model, child) => Scaffold(
           appBar: _buildAppBar(model),
           body: _buildBody(context, model),
         ),
       );
 
-  AppBar _buildAppBar(CompanyDetailViewModel viewModel) => AppBar(
-        title: Text('${viewModel.dto?.id ?? ''} ${viewModel.dto?.abbr ?? ''}'),
-        actions: [
-          IconButton(
-            onPressed: () => viewModel.onPressFollowingButton(),
-            icon: const Icon(Icons.star_border),
-          )
-        ],
-      );
+  AppBar _buildAppBar(CompanyDetailViewModel viewModel) {
+    final title = '${viewModel.dto?.id ?? ''} ${viewModel.dto?.abbr ?? ''}';
+    return AppBar(
+      title: Text(title),
+      actions: [
+        IconButton(
+          onPressed: () async {
+            final result = (viewModel.isFollowed.value)
+                ? AppDialog.show(
+                    context,
+                    title: '從追蹤列表移除',
+                    content: '是否將$title移除追蹤列表移除',
+                    confirmLabel: '移除',
+                  )
+                : AppDialog.show(
+                    context,
+                    title: '加入列表移除',
+                    content: '是否將$title加入追蹤列表移除',
+                    confirmLabel: '加入',
+                  );
+            switch (await result) {
+              case AppDialogResult.confirm:
+                viewModel.onPressStarButton();
+                break;
+              case AppDialogResult.cancel:
+              default:
+                break;
+            }
+          },
+          icon: ValueListenableBuilder(
+            valueListenable: viewModel.isFollowed,
+            builder: (context, value, child) {
+              return value ? const Icon(Icons.star) : const Icon(Icons.star_border);
+            },
+          ),
+        )
+      ],
+    );
+  }
 
   Widget _buildBody(BuildContext context, CompanyDetailViewModel viewModel) {
     switch (viewModel.viewState.state) {
