@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
           bottomNavigationBar: BottomNavigationBar(
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.account_balance), label: "industries"),
-              BottomNavigationBarItem(icon: Icon(Icons.star_border), label: "following"),
+              BottomNavigationBarItem(icon: Icon(Icons.star_border), label: "favourite"),
             ],
             onTap: viewModel.onItemTapped,
             currentIndex: viewModel.selectedIndex,

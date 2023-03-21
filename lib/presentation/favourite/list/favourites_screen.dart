@@ -4,7 +4,7 @@ import 'package:stacked/stacked.dart';
 import 'package:twse_info_flutter/app/widgets/app_bar.dart';
 import 'package:twse_info_flutter/presentation/company/detail/company_detail_screen.dart';
 import 'package:twse_info_flutter/presentation/company/list/widgets/company_tile.dart';
-import 'package:twse_info_flutter/presentation/favourite/list/followings_view_model.dart';
+import 'package:twse_info_flutter/presentation/favourite/list/favourites_view_model.dart';
 
 class FavouritesScreen extends StatefulWidget {
   const FavouritesScreen({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class FavouritesScreen extends StatefulWidget {
 class _FavouritesScreenState extends State<FavouritesScreen> {
   @override
   Widget build(BuildContext context) => ViewModelBuilder.reactive(
-        viewModelBuilder: () => FollowingsViewModel(),
+        viewModelBuilder: () => FavouritesViewModel(),
         builder: (context, model, child) => Scaffold(
           appBar: _buildAppBar(),
           body: _buildListView(),
