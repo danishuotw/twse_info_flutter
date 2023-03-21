@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:stacked/stacked.dart';
 import 'package:twse_info_flutter/app/widgets/app_bar.dart';
 import 'package:twse_info_flutter/presentation/company/detail/company_detail_screen.dart';
 import 'package:twse_info_flutter/presentation/company/list/widgets/company_tile.dart';
+import 'package:twse_info_flutter/presentation/favourite/list/followings_view_model.dart';
 
-class FollowingsScreen extends StatefulWidget {
-  const FollowingsScreen({Key? key}) : super(key: key);
+class FavouritesScreen extends StatefulWidget {
+  const FavouritesScreen({Key? key}) : super(key: key);
 
   @override
-  State<FollowingsScreen> createState() => _FollowingsScreenState();
+  State<FavouritesScreen> createState() => _FavouritesScreenState();
 }
 
-class _FollowingsScreenState extends State<FollowingsScreen> {
+class _FavouritesScreenState extends State<FavouritesScreen> {
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: _buildAppBar(),
-        body: _buildListView(),
+  Widget build(BuildContext context) => ViewModelBuilder.reactive(
+        viewModelBuilder: () => FollowingsViewModel(),
+        builder: (context, model, child) => Scaffold(
+          appBar: _buildAppBar(),
+          body: _buildListView(),
+        ),
       );
 
   AppNavBar _buildAppBar() => const AppNavBar(

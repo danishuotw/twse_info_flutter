@@ -13,7 +13,7 @@ import 'package:twse_info_flutter/data/remote/data_state.dart';
 abstract class CompanyRepository {
   Future<DataState<Map<String, List<CompanyDto>>>> fetchData();
   Future<DataState<CompanyDto>> getCompany(String id);
-  Future<DataState<List<CompanyDto>>> getCompanies();
+  // Future<DataState<List<CompanyDto>>> getCompanies();
 
   Map<String, CompanyDto>? companyMap;
   Map<String, List<CompanyDto>>? industryMap;
@@ -64,20 +64,20 @@ class _CompanyRepository implements CompanyRepository {
     }
   }
 
-  @override
-  Future<DataState<List<CompanyDto>>> getCompanies() async {
-    final response = await http.get(Uri.parse('${ApiConfig.baseURL}/opendata/t187ap03_P'));
-    try {
-      if (response.statusCode == HttpStatus.ok) {
-        final List<dynamic> dataList = jsonDecode(utf8.decode(response.bodyBytes));
-        companies = dataList.map((e) => CompanyModel.fromJson(e).toCompanyDto()).toList();
-        return DataSuccess(companies);
-      } else {
-        return DataFailed(response.statusCode.toString());
-      }
-    } catch (e) {
-      if (kDebugMode) print(e);
-      return DataFailed(e.toString());
-    }
-  }
+  // @override
+  // Future<DataState<List<CompanyDto>>> getCompanies() async {
+  //   final response = await http.get(Uri.parse('${ApiConfig.baseURL}/opendata/t187ap03_P'));
+  //   try {
+  //     if (response.statusCode == HttpStatus.ok) {
+  //       final List<dynamic> dataList = jsonDecode(utf8.decode(response.bodyBytes));
+  //       companies = dataList.map((e) => CompanyModel.fromJson(e).toCompanyDto()).toList();
+  //       return DataSuccess(companies);
+  //     } else {
+  //       return DataFailed(response.statusCode.toString());
+  //     }
+  //   } catch (e) {
+  //     if (kDebugMode) print(e);
+  //     return DataFailed(e.toString());
+  //   }
+  // }
 }

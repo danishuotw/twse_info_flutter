@@ -1,7 +1,8 @@
+import 'package:twse_info_flutter/data/local/db/app_database.dart';
 import 'package:twse_info_flutter/data/model/dto/company_dto.dart';
 import 'package:twse_info_flutter/data/model/remote/company/company_model.dart';
 
-extension CompanyDtoEx on CompanyModel {
+extension CompanyModelEx on CompanyModel {
   CompanyDto toCompanyDto() {
     return CompanyDto(
       companyCode,
@@ -18,6 +19,50 @@ extension CompanyDtoEx on CompanyModel {
       paidInCapital,
       specialStock,
       ordinaryShareParValuePerShare,
+      url,
+    );
+  }
+}
+
+extension CompanyEntityEx on CompanyDto {
+  CompanyEntity toCompanyEntity() {
+    return CompanyEntity(
+      id: id,
+      name: name,
+      abbr: abbr,
+      industry: industry,
+      establishmentDate: establishmentDate,
+      listedDate: listedDate,
+      chairman: chairman,
+      generalManager: generalManager,
+      switchboardPhone: switchboardPhone,
+      address: address,
+      unifiedNumber: unifiedNumber,
+      paidInCapital: paidInCapital,
+      specialStock: specialStock,
+      parValue: parValue,
+      url: url,
+    );
+  }
+}
+
+extension CompanyDtoyEx on CompanyEntity {
+  CompanyDto toCompanyDto() {
+    return CompanyDto(
+      id,
+      name,
+      abbr,
+      industry,
+      establishmentDate,
+      listedDate,
+      chairman,
+      generalManager,
+      switchboardPhone,
+      address,
+      unifiedNumber,
+      paidInCapital,
+      specialStock,
+      parValue,
       url,
     );
   }
