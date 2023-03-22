@@ -58,18 +58,4 @@ class _CompanyRepository implements CompanyRepository {
       return const DataFailed('Data not found...');
     }
   }
-
-  // @override
-  // Future<List<CompanyDto>> getCompanies() async {
-  //   final response = await http.get(Uri.parse('${ApiConfig.baseURL}/opendata/t187ap03_P'));
-  //   try {
-  //     if (response.statusCode == HttpStatus.ok) {
-  //       final List<dynamic> dataList = jsonDecode(utf8.decode(response.bodyBytes));
-  //       final companies = dataList.map((e) => CompanyModel.fromJson(e).toCompanyDto()).toList();
-  //     } else {}
-  //   } catch (e) {
-  //     if (kDebugMode) print(e);
-  //     return DataFailed(e.toString());
-  //   }
-  // }
 }
