@@ -27,7 +27,7 @@ class CompanyDetailViewModel extends ChangeNotifier {
   late Map<String, String> basicInfo = {
     '總經理': dto?.chairman ?? '',
     '董事長': dto?.generalManager ?? '',
-    '產業類別': dto?.industry ?? '',
+    '產業類別': dto?.industryText ?? '',
     '公司成立時間': dto?.establishmentDate ?? '',
     '上市日期': dto?.listedDate ?? '',
   };

@@ -10,8 +10,14 @@ class AppNavBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) => AppBar(
-        title: Text(title),
-        centerTitle: true,
+        title: Text(
+          title,
+          style: TextStyle(
+            fontSize: 30.0,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        centerTitle: false,
       );
 
   @override

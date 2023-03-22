@@ -1,3 +1,5 @@
+import 'package:twse_info_flutter/data/model/dto/industry_type.dart';
+
 typedef CompanyDtoMap = Map<String, List<CompanyDto>>;
 
 class CompanyDto {
@@ -36,4 +38,6 @@ class CompanyDto {
     this.parValue,
     this.url,
   );
+
+  String get industryText => IndustryType.fromValue(industry ?? '').name();
 }

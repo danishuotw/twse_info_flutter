@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:twse_info_flutter/app/base/view_state.dart';
@@ -25,6 +26,8 @@ class CompanyDetailScreen extends StatefulWidget {
 }
 
 class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
+  static const double _expandedHeaderHeight = 150.0;
+
   @override
   Widget build(BuildContext context) => ViewModelBuilder.reactive(
         viewModelBuilder: () => CompanyDetailViewModel(id: widget.companyId),
@@ -33,15 +36,56 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
           model.getFavourite();
         },
         builder: (context, model, child) => Scaffold(
-          appBar: _buildAppBar(model),
           body: _buildBody(context, model),
         ),
       );
+  Widget _buildBody(BuildContext context, CompanyDetailViewModel viewModel) {
+    switch (viewModel.viewState.state) {
+      case ResponseState.LOADING:
+        return const AppLoadingScreen();
+      case ResponseState.COMPLETE:
+        return _buildCustomScrollView(viewModel);
+      case ResponseState.ERROR:
+        return const AppErrorScreen();
+      case ResponseState.EMPTY:
+        return const AppEmptyScreen();
+    }
+  }
 
-  AppBar _buildAppBar(CompanyDetailViewModel viewModel) {
+  Widget _buildCustomScrollView(CompanyDetailViewModel viewModel) {
+    return CustomScrollView(
+      slivers: [
+        _buildTopBar(viewModel),
+        _buildTitleWidget(viewModel),
+        _buildInfoWidget(viewModel),
+        _buildDivider(),
+        _buildContactWidget(viewModel),
+        _buildDivider(),
+        _buildICapitalWidget(viewModel),
+      ],
+    );
+  }
+
+  Widget _buildDivider() {
+    return const SliverToBoxAdapter(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        child: AppDivider(),
+      ),
+    );
+  }
+
+  Widget _buildTopBar(CompanyDetailViewModel viewModel) {
     final title = '${viewModel.dto?.id ?? ''} ${viewModel.dto?.abbr ?? ''}';
-    return AppBar(
-      title: Text(title),
+    return SliverAppBar(
+      centerTitle: false,
+      titleSpacing: 0.0,
+      title: Text(
+        viewModel.dto?.industryText ?? '',
+        style: const TextStyle(fontSize: 12.0),
+      ),
+      pinned: true,
+      expandedHeight: _expandedHeaderHeight,
       actions: [
         IconButton(
           onPressed: () async {
@@ -75,44 +119,20 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
           ),
         )
       ],
+      flexibleSpace: FlexibleSpaceBar(title: Text(title)),
     );
   }
 
-  Widget _buildBody(BuildContext context, CompanyDetailViewModel viewModel) {
-    switch (viewModel.viewState.state) {
-      case ResponseState.LOADING:
-        return const AppLoadingScreen();
-      case ResponseState.COMPLETE:
-        return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              children: [
-                _buildTitleWidget(viewModel),
-                _buildInfoWidget(viewModel),
-                const AppDivider(),
-                _buildContactWidget(viewModel),
-                const AppDivider(),
-                _buildICapitalWidget(viewModel),
-              ],
-            ),
+  Widget _buildTitleWidget(CompanyDetailViewModel viewModel) => SliverToBoxAdapter(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('基本資料'),
+              _buildLinkableText(viewModel),
+            ],
           ),
-        );
-      case ResponseState.ERROR:
-        return const AppErrorScreen();
-      case ResponseState.EMPTY:
-        return const AppEmptyScreen();
-    }
-  }
-
-  Widget _buildTitleWidget(CompanyDetailViewModel viewModel) => Padding(
-        padding: const EdgeInsets.only(bottom: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('基本資料'),
-            _buildLinkableText(viewModel),
-          ],
         ),
       );
 
@@ -140,65 +160,75 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
 
   Future<void> _launchUrl(Uri url) async {
     if (!await launchUrl(url)) {
-      throw Exception('Could not launch $url');
+      if (kDebugMode) print('Could not launch $url');
     }
   }
 
   Widget _buildInfoWidget(CompanyDetailViewModel viewModel) {
     final items = viewModel.basicInfo.entries.toList();
-    return GridView.builder(
-      shrinkWrap: true,
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        childAspectRatio: 2.0,
+    return SliverPadding(
+      padding: const EdgeInsets.all(20.0),
+      sliver: SliverGrid.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          childAspectRatio: 2.0,
+        ),
+        itemCount: items.length,
+        itemBuilder: (BuildContext context, int index) {
+          final item = items[index];
+          return CompanyLabelText(
+            label: item.key,
+            title: item.value,
+          );
+        },
       ),
-      itemCount: items.length,
-      itemBuilder: (BuildContext context, int index) {
-        final item = items[index];
-        return CompanyLabelText(
-          label: item.key,
-          title: item.value,
-        );
-      },
     );
   }
 
   Widget _buildContactWidget(CompanyDetailViewModel viewModel) {
     final items = viewModel.contactInfo.entries.toList();
-    return GridView.builder(
-      shrinkWrap: true,
-      padding: const EdgeInsets.symmetric(vertical: 20.0),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        childAspectRatio: 2.0,
+    return SliverPadding(
+      padding: const EdgeInsets.all(20.0),
+      sliver: SliverGrid.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          childAspectRatio: 2.0,
+        ),
+        itemCount: items.length,
+        itemBuilder: (BuildContext context, int index) {
+          final item = items[index];
+          return CompanyLabelText(
+            label: item.key,
+            title: item.value,
+          );
+        },
       ),
-      itemCount: items.length,
-      itemBuilder: (BuildContext context, int index) {
-        final item = items[index];
-        return CompanyLabelText(
-          label: item.key,
-          title: item.value,
-        );
-      },
     );
   }
 
   Widget _buildICapitalWidget(CompanyDetailViewModel viewModel) {
     final items = viewModel.capitalInfo.entries.toList();
-    return ListView.separated(
-      padding: const EdgeInsets.only(top: 30.0),
-      shrinkWrap: true,
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        final item = items[index];
-        return CompanyLabelText(
-          label: item.key,
-          title: item.value,
-        );
-      },
-      separatorBuilder: (context, index) => const SizedBox(
-        height: 16.0,
+    return SliverPadding(
+      padding: const EdgeInsets.all(20.0),
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate(
+          childCount: items.length,
+          (context, index) {
+            final item = items[index];
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CompanyLabelText(
+                  label: item.key,
+                  title: item.value,
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
