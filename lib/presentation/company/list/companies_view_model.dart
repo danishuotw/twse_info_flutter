@@ -6,13 +6,16 @@ import 'package:twse_info_flutter/data/remote/data_state.dart';
 import 'package:twse_info_flutter/data/repository/company_repository.dart';
 
 class CompaniesViewModel extends ChangeNotifier {
-  final CompanyRepository _companyRepository = injector<CompanyRepository>();
+  final CompanyRepository? _companyRepository;
 
   final String id;
 
   ViewState<List<CompanyDto>> viewState = ViewState(state: ResponseState.EMPTY);
 
-  CompaniesViewModel({required this.id});
+  CompaniesViewModel({
+    required this.id,
+    CompanyRepository? companyRepository,
+  }) : _companyRepository = (companyRepository == null) ? injector<CompanyRepository>() : companyRepository;
 
   void _setViewState(ViewState<List<CompanyDto>> viewState) {
     this.viewState = viewState;
@@ -21,13 +24,13 @@ class CompaniesViewModel extends ChangeNotifier {
 
   void fetchData() async {
     _setViewState(ViewState.loading());
-    final companies = await _companyRepository.fetchData();
+    final companies = await _companyRepository?.fetchData();
     if (companies is DataSuccess) {
-      final list = companies.data?[id] ?? List.empty();
+      final list = companies?.data?[id] ?? List.empty();
       _setViewState(ViewState.complete(list));
     }
     if (companies is DataFailed) {
-      final error = companies.error;
+      final error = companies?.error;
       if (kDebugMode) print(error);
       _setViewState(ViewState.error(error.toString()));
     }
