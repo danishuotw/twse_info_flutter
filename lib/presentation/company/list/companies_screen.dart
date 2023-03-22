@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:stacked/stacked.dart';
 import 'package:twse_info_flutter/app/base/view_state.dart';
 import 'package:twse_info_flutter/app/widgets/app_bar.dart';
+import 'package:twse_info_flutter/app/widgets/app_divider.dart';
 import 'package:twse_info_flutter/app/widgets/app_empty_screen.dart';
 import 'package:twse_info_flutter/app/widgets/app_error_screen.dart';
 import 'package:twse_info_flutter/app/widgets/app_loading_screen.dart';
@@ -62,7 +63,7 @@ class CompaniesScreen extends StatelessWidget {
           title: item.name ?? '',
         );
       },
-      separatorBuilder: (context, index) => const Divider(),
+      separatorBuilder: (context, index) => const AppDivider(),
     );
   }
 

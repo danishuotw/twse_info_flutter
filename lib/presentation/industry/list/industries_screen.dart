@@ -3,11 +3,14 @@ import 'package:go_router/go_router.dart';
 import 'package:stacked/stacked.dart';
 import 'package:twse_info_flutter/app/base/view_state.dart';
 import 'package:twse_info_flutter/app/widgets/app_bar.dart';
+import 'package:twse_info_flutter/app/widgets/app_divider.dart';
 import 'package:twse_info_flutter/app/widgets/app_empty_screen.dart';
 import 'package:twse_info_flutter/app/widgets/app_error_screen.dart';
 import 'package:twse_info_flutter/app/widgets/app_loading_screen.dart';
 import 'package:twse_info_flutter/data/model/dto/industry_type.dart';
 import 'package:twse_info_flutter/presentation/company/list/companies_screen.dart';
+import 'package:twse_info_flutter/presentation/company/list/strings/companies_strings.dart';
+import 'package:twse_info_flutter/presentation/home/strings/home_strings.dart';
 import 'package:twse_info_flutter/presentation/industry/list/industries_view_model.dart';
 
 class IndustriesScreen extends StatelessWidget {
@@ -19,7 +22,7 @@ class IndustriesScreen extends StatelessWidget {
         onModelReady: (viewModel) => viewModel.fetchData(),
         builder: (context, viewModel, child) => Scaffold(
           appBar: const AppNavBar(
-            title: '產業別',
+            title: HomeStrings.title,
             // backgroundColor: Colors.white,
           ),
           body: _buildBody(context, viewModel),
@@ -42,6 +45,7 @@ class IndustriesScreen extends StatelessWidget {
   Widget _buildListView(IndustriesViewModel viewModel) {
     final items = viewModel.viewState.data ?? List.empty();
     return ListView.separated(
+      key: const Key(CompaniesStrings.listView_key),
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
@@ -55,7 +59,7 @@ class IndustriesScreen extends StatelessWidget {
           ),
         );
       },
-      separatorBuilder: (context, index) => const Divider(),
+      separatorBuilder: (context, index) => const AppDivider(),
     );
   }
 

@@ -27,7 +27,10 @@ class AppDialog {
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
-              child: Text(cancelLabel ?? '取消'),
+              child: Text(
+                cancelLabel ?? '取消',
+                style: const TextStyle(color: Colors.black),
+              ),
               onPressed: () {
                 Navigator.of(context).pop(AppDialogResult.cancel);
               },
@@ -36,7 +39,10 @@ class AppDialog {
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
-              child: Text(confirmLabel ?? '確認'),
+              child: Text(
+                confirmLabel ?? '確認',
+                style: const TextStyle(color: Colors.deepPurple),
+              ),
               onPressed: () {
                 Navigator.of(context).pop(AppDialogResult.confirm);
               },

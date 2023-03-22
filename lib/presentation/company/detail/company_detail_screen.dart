@@ -78,14 +78,19 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
   Widget _buildTopBar(CompanyDetailViewModel viewModel) {
     final title = '${viewModel.dto?.id ?? ''} ${viewModel.dto?.abbr ?? ''}';
     return SliverAppBar(
+      elevation: 0,
+      pinned: true,
       centerTitle: false,
+      backgroundColor: Colors.white,
+      expandedHeight: _expandedHeaderHeight,
+      iconTheme: const IconThemeData(
+        color: Colors.black,
+      ),
       titleSpacing: 0.0,
       title: Text(
         viewModel.dto?.industryText ?? '',
-        style: const TextStyle(fontSize: 12.0),
+        style: const TextStyle(fontSize: 12.0, color: Colors.black),
       ),
-      pinned: true,
-      expandedHeight: _expandedHeaderHeight,
       actions: [
         IconButton(
           onPressed: () async {
@@ -119,7 +124,19 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
           ),
         )
       ],
-      flexibleSpace: FlexibleSpaceBar(title: Text(title)),
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(1.0),
+        child: Container(
+          color: Colors.black,
+          height: 1.0,
+        ),
+      ),
+      flexibleSpace: FlexibleSpaceBar(
+        title: Text(
+          title,
+          style: const TextStyle(color: Colors.black),
+        ),
+      ),
     );
   }
 
@@ -149,11 +166,14 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
               style: const TextStyle(
                 color: Colors.lightBlue,
                 fontSize: 20.0,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(width: 4.0),
-            const Icon(Icons.link),
+            Icon(
+              Icons.link,
+              color: (viewModel.dto?.url ?? '').isEmpty ? Colors.grey : Colors.black,
+            ),
           ],
         ),
       );
