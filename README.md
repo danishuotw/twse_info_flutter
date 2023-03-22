@@ -53,7 +53,7 @@ Components of data layer include:
 - __repository__: Responsible for exposing data to the domain layer.
 
 ```dart
-// ###
+// Folder
 /data/local
 /data/remote
 /data/model/dto
@@ -63,7 +63,7 @@ Components of data layer include:
 ### Utils 
 - Any additional helpers or strings are put inside the utils
 ```dart
-// ###
+// File path
 /utils/string_ext.dart
 ```
 
@@ -71,14 +71,14 @@ Components of data layer include:
 - Unit tests of repository tests and view model tests
 
 ```dart
-// ###
+// Folder path
 /test/repo
 /test/view_model
 ```
 
 - Integration tests
 ```dart
-// ###
+// Folder path
 /integration_test/robots
 /integration_test/app_test.dart
 ```
@@ -86,7 +86,6 @@ Components of data layer include:
 - Run the cmd
 
 ```dart
-// ###
 flutter test --coverage
 
 flutter drive \
