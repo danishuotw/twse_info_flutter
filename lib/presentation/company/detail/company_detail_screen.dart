@@ -97,14 +97,14 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
             final result = (viewModel.isFollowed.value)
                 ? AppDialog.show(
                     context,
-                    title: '從追蹤列表移除',
-                    content: '是否將$title移除追蹤列表移除',
+                    title: '從追蹤列表中移除',
+                    content: '是否將$title從追蹤列表中移除',
                     confirmLabel: '移除',
                   )
                 : AppDialog.show(
                     context,
-                    title: '加入列表移除',
-                    content: '是否將$title加入追蹤列表移除',
+                    title: '加入追蹤列表',
+                    content: '是否將$title加入追蹤列表內',
                     confirmLabel: '加入',
                   );
             switch (await result) {
