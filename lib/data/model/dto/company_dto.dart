@@ -20,7 +20,7 @@ class CompanyDto {
   final String? parValue; // 普通股每股面額
   final String? url; // 網址
 
-  CompanyDto(
+  CompanyDto({
     this.id,
     this.name,
     this.abbr,
@@ -37,7 +37,7 @@ class CompanyDto {
     this.specialStock,
     this.parValue,
     this.url,
-  );
+  });
 
   String get industryText => IndustryType.fromValue(industry ?? '').name();
 }

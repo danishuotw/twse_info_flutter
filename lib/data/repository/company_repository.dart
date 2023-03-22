@@ -18,25 +18,20 @@ abstract class CompanyRepository {
   Map<String, CompanyDto>? companyMap;
   Map<String, List<CompanyDto>>? industryMap;
 
-  factory CompanyRepository() => _CompanyRepository._instance;
+  factory CompanyRepository() => _CompanyRepository();
 }
 
 class _CompanyRepository implements CompanyRepository {
-  static final _CompanyRepository _instance = _CompanyRepository._internal();
-
-  _CompanyRepository._internal();
-
+  List<CompanyDto> companies = [];
   @override
   Map<String, CompanyDto>? companyMap; // Cache
   @override
   Map<String, List<CompanyDto>>? industryMap; // Cache
 
-  List<CompanyDto> companies = [];
-
   @override
   Future<DataState<Map<String, List<CompanyDto>>>> fetchData() async {
     if (industryMap != null) return Future.value(DataSuccess(industryMap));
-    final response = await http.get(Uri.parse('${ApiConfig.baseURL}/opendata/t187ap03_P'));
+    final response = await http.get(Uri.parse('${ApiConfig.baseURL}${ApiConfig.openDataPath}'));
     try {
       if (response.statusCode == HttpStatus.ok) {
         final List<dynamic> dataList = jsonDecode(utf8.decode(response.bodyBytes));
@@ -65,16 +60,13 @@ class _CompanyRepository implements CompanyRepository {
   }
 
   // @override
-  // Future<DataState<List<CompanyDto>>> getCompanies() async {
+  // Future<List<CompanyDto>> getCompanies() async {
   //   final response = await http.get(Uri.parse('${ApiConfig.baseURL}/opendata/t187ap03_P'));
   //   try {
   //     if (response.statusCode == HttpStatus.ok) {
   //       final List<dynamic> dataList = jsonDecode(utf8.decode(response.bodyBytes));
-  //       companies = dataList.map((e) => CompanyModel.fromJson(e).toCompanyDto()).toList();
-  //       return DataSuccess(companies);
-  //     } else {
-  //       return DataFailed(response.statusCode.toString());
-  //     }
+  //       final companies = dataList.map((e) => CompanyModel.fromJson(e).toCompanyDto()).toList();
+  //     } else {}
   //   } catch (e) {
   //     if (kDebugMode) print(e);
   //     return DataFailed(e.toString());

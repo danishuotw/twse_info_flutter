@@ -5,7 +5,7 @@ import 'package:twse_info_flutter/data/model/dto/company_dto_ext.dart';
 
 class WatchAllFavouriteParams {}
 
-class WatchAllFavourite implements Watcher<List<CompanyDto>, WatchAllFavouriteParams> {
+class WatchAllFavourite implements UseCaseWatcher<List<CompanyDto>, WatchAllFavouriteParams> {
   final FavouriteLocalDataSource _favouriteLocalDataSource;
 
   WatchAllFavourite(this._favouriteLocalDataSource);
