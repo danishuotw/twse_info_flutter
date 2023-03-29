@@ -10,5 +10,5 @@ abstract class CompanyService {
   factory CompanyService(Dio dio) = _CompanyService;
 
   @GET("/opendata/t187ap03_P")
-  Future<HttpResponse<CompanyModel>> getCompanies();
+  Future<HttpResponse<List<CompanyModel>>> getCompanies();
 }
