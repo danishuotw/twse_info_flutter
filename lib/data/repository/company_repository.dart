@@ -8,7 +8,7 @@ import 'package:twse_info_flutter/data/remote/data_state.dart';
 import 'package:twse_info_flutter/data/remote/serivce/company/company_service.dart';
 
 abstract class CompanyRepository {
-  Future<DataState<Map<String, List<CompanyDto>>>> fetchData();
+  Future<DataState<Map<String, List<CompanyDto>>>> getCompanies();
   Future<DataState<CompanyDto>> getCompany(String id);
 
   Map<String, CompanyDto>? companyMap;
@@ -41,7 +41,7 @@ class _CompanyRepository with CompanyRepositoryMixin implements CompanyRepositor
   }
 
   @override
-  Future<DataState<Map<String, List<CompanyDto>>>> fetchData() async {
+  Future<DataState<Map<String, List<CompanyDto>>>> getCompanies() async {
     if (industryMap != null) return Future.value(DataSuccess(industryMap));
     final httpResponse = await companyService.getCompanies();
     try {

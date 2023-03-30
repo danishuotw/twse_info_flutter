@@ -19,7 +19,7 @@ class IndustriesViewModel extends ChangeNotifier {
 
   void fetchData() async {
     _setViewState(ViewState.loading());
-    final companies = await _companyRepository?.fetchData();
+    final companies = await _companyRepository?.getCompanies();
     if (companies is DataSuccess) {
       final list = companies?.data?.entries.toList();
       _setViewState(ViewState.complete(list));

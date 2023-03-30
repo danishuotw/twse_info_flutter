@@ -8,8 +8,7 @@ import 'dart:async' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:twse_info_flutter/data/model/dto/company_dto.dart' as _i5;
 import 'package:twse_info_flutter/data/remote/data_state.dart' as _i3;
-import 'package:twse_info_flutter/data/remote/serivce/company/company_service.dart'
-    as _i2;
+import 'package:twse_info_flutter/data/remote/serivce/company/company_service.dart' as _i2;
 
 import 'company_repo_test.dart' as _i4;
 
@@ -24,8 +23,7 @@ import 'company_repo_test.dart' as _i4;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeCompanyService_0 extends _i1.SmartFake
-    implements _i2.CompanyService {
+class _FakeCompanyService_0 extends _i1.SmartFake implements _i2.CompanyService {
   _FakeCompanyService_0(
     Object parent,
     Invocation parentInvocation,
@@ -54,18 +52,18 @@ class MockCompanyRepoTest extends _i1.Mock implements _i4.CompanyRepoTest {
   }
 
   @override
-  _i2.CompanyService get companyService => (super.noSuchMethod(
-        Invocation.getter(#companyService),
-        returnValue: _FakeCompanyService_0(
-          this,
-          Invocation.getter(#companyService),
-        ),
-      ) as _i2.CompanyService);
-  @override
-  set companyService(_i2.CompanyService? _companyService) => super.noSuchMethod(
+  set companyMap(Map<String, _i5.CompanyDto>? _companyMap) => super.noSuchMethod(
         Invocation.setter(
-          #companyService,
-          _companyService,
+          #companyMap,
+          _companyMap,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  set industryMap(Map<String, List<_i5.CompanyDto>>? _industryMap) => super.noSuchMethod(
+        Invocation.setter(
+          #industryMap,
+          _industryMap,
         ),
         returnValueForMissingStub: null,
       );
@@ -83,33 +81,29 @@ class MockCompanyRepoTest extends _i1.Mock implements _i4.CompanyRepoTest {
         returnValueForMissingStub: null,
       );
   @override
-  set companyMap(Map<String, _i5.CompanyDto>? _companyMap) =>
-      super.noSuchMethod(
+  _i2.CompanyService get companyService => (super.noSuchMethod(
+        Invocation.getter(#companyService),
+        returnValue: _FakeCompanyService_0(
+          this,
+          Invocation.getter(#companyService),
+        ),
+      ) as _i2.CompanyService);
+  @override
+  set companyService(_i2.CompanyService? _companyService) => super.noSuchMethod(
         Invocation.setter(
-          #companyMap,
-          _companyMap,
+          #companyService,
+          _companyService,
         ),
         returnValueForMissingStub: null,
       );
   @override
-  set industryMap(Map<String, List<_i5.CompanyDto>>? _industryMap) =>
-      super.noSuchMethod(
-        Invocation.setter(
-          #industryMap,
-          _industryMap,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  _i6.Future<_i3.DataState<Map<String, List<_i5.CompanyDto>>>> fetchData() =>
-      (super.noSuchMethod(
+  _i6.Future<_i3.DataState<Map<String, List<_i5.CompanyDto>>>> getCompanies() => (super.noSuchMethod(
         Invocation.method(
           #fetchData,
           [],
         ),
-        returnValue:
-            _i6.Future<_i3.DataState<Map<String, List<_i5.CompanyDto>>>>.value(
-                _FakeDataState_1<Map<String, List<_i5.CompanyDto>>>(
+        returnValue: _i6.Future<_i3.DataState<Map<String, List<_i5.CompanyDto>>>>.value(
+            _FakeDataState_1<Map<String, List<_i5.CompanyDto>>>(
           this,
           Invocation.method(
             #fetchData,
@@ -118,14 +112,12 @@ class MockCompanyRepoTest extends _i1.Mock implements _i4.CompanyRepoTest {
         )),
       ) as _i6.Future<_i3.DataState<Map<String, List<_i5.CompanyDto>>>>);
   @override
-  _i6.Future<_i3.DataState<_i5.CompanyDto>> getCompany(String? id) =>
-      (super.noSuchMethod(
+  _i6.Future<_i3.DataState<_i5.CompanyDto>> getCompany(String? id) => (super.noSuchMethod(
         Invocation.method(
           #getCompany,
           [id],
         ),
-        returnValue: _i6.Future<_i3.DataState<_i5.CompanyDto>>.value(
-            _FakeDataState_1<_i5.CompanyDto>(
+        returnValue: _i6.Future<_i3.DataState<_i5.CompanyDto>>.value(_FakeDataState_1<_i5.CompanyDto>(
           this,
           Invocation.method(
             #getCompany,
