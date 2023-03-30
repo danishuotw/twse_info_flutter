@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:twse_info_flutter/data/remote/dio/log_interceptor.dart';
 
 class DioProvider {
   final String _baseUrl;
@@ -12,5 +13,8 @@ class DioProvider {
         connectTimeout: const Duration(seconds: 5),
       );
 
-  Dio create() => Dio(_createBaseOptions())..interceptors.addAll([]);
+  Dio create() => Dio(_createBaseOptions())
+    ..interceptors.addAll([
+      LogInterceptors(),
+    ]);
 }
