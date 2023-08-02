@@ -4,10 +4,10 @@ class AppEmptyScreen extends StatelessWidget {
   const AppEmptyScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Center(
+  Widget build(BuildContext context) => const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text("No Data Found"),
           ],
         ),
