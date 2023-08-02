@@ -6,38 +6,38 @@ String companyToJson(CompanyModel data) => json.encode(data.toJson());
 
 class CompanyModel {
   CompanyModel({
-    required this.publishedDate, // 出表日期
-    required this.companyCode, // 公司代號
-    required this.companyName, // 公司名稱
-    required this.companyAbbreviation, // 公司簡稱
-    required this.countryWhereTheForeignEnterpriseIsRegistered, // 外國企業註冊地國
-    required this.industry, // 產業別
-    required this.address, // 住址
-    required this.unifiedNumberOfProfitableEnterprises, // 營利事業統一編號
-    required this.chairman, // 董事長
-    required this.generalManager, // 總經理
-    required this.speaker, // 發言人
-    required this.speakerTitle, // 發言人職稱
-    required this.actingSpokesperson, // 代理發言人
-    required this.switchboardPhone, // 總機電話
-    required this.establishmentDate, // 成立日期
-    required this.listedDate, // 上市日期
-    required this.ordinaryShareParValuePerShare, // 普通股每股面額
-    required this.paidInCapital, // 實收資本額
-    required this.numberOfPrivateShares, // 私募股數
-    required this.specialStock, // 特別股
-    required this.preparationFinancialStatementType, // 編制財務報表類型
-    required this.stockTransferAgency, // 股票過戶機構
-    required this.transferPhone, // 過戶電話
-    required this.transferAddress, // 過戶地址
-    required this.visaAccountingFirm, // 簽證會計師事務所
-    required this.visaAccountant1, // 簽證會計師1
-    required this.visaAccountant2, // 簽證會計師2
-    required this.englishAbbreviation, // 英文簡稱
-    required this.englishCorrespondenceAddress, // 英文通訊地址
-    required this.faxMachineNumber, // 傳真機號碼
-    required this.eMail, // 電子郵件信箱
-    required this.url, // 網址
+    required this.publishedDate,
+    required this.companyCode,
+    required this.companyName,
+    required this.companyAbbreviation,
+    required this.countryWhereTheForeignEnterpriseIsRegistered,
+    required this.industry,
+    required this.address,
+    required this.unifiedNumberOfProfitableEnterprises,
+    required this.chairman,
+    required this.generalManager,
+    required this.speaker,
+    required this.speakerTitle,
+    required this.actingSpokesperson,
+    required this.switchboardPhone,
+    required this.establishmentDate,
+    required this.listedDate,
+    required this.ordinaryShareParValuePerShare,
+    required this.paidInCapital,
+    required this.numberOfPrivateShares,
+    required this.specialStock,
+    required this.preparationFinancialStatementType,
+    required this.stockTransferAgency,
+    required this.transferPhone,
+    required this.transferAddress,
+    required this.visaAccountingFirm,
+    required this.visaAccountant1,
+    required this.visaAccountant2,
+    required this.englishAbbreviation,
+    required this.englishCorrespondenceAddress,
+    required this.faxMachineNumber,
+    required this.eMail,
+    required this.url,
   });
 
   final String publishedDate;
