@@ -61,7 +61,7 @@ class CompaniesRoute {
           path: path,
           name: path,
           builder: (BuildContext context, GoRouterState state) =>
-              CompaniesScreen(industryId: state.params['industryId'] ?? ''),
+              CompaniesScreen(industryId: state.pathParameters['industryId'] ?? ''),
         );
 }
 
@@ -74,6 +74,6 @@ class CompanyDetailRoute {
           path: path,
           name: path,
           builder: (BuildContext context, GoRouterState state) =>
-              CompanyDetailScreen(companyId: state.params['companyId'] ?? ''),
+              CompanyDetailScreen(companyId: state.pathParameters['companyId'] ?? ''),
         );
 }

@@ -19,7 +19,7 @@ class IndustriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ViewModelBuilder<IndustriesViewModel>.reactive(
         viewModelBuilder: () => IndustriesViewModel(),
-        onModelReady: (viewModel) => viewModel.fetchData(),
+        onViewModelReady: (viewModel) => viewModel.fetchData(),
         builder: (context, viewModel, child) => Scaffold(
           appBar: const AppNavBar(
             title: HomeStrings.title,
@@ -64,5 +64,5 @@ class IndustriesScreen extends StatelessWidget {
   }
 
   void _navigateCompanies(BuildContext context, String id) =>
-      context.pushNamed(CompaniesScreen.route, params: {'industryId': id});
+      context.pushNamed(CompaniesScreen.route, pathParameters: {'industryId': id});
 }

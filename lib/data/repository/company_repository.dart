@@ -20,7 +20,7 @@ abstract class CompanyRepository {
   factory CompanyRepository(CompanyService companyService) => _CompanyRepository(companyService);
 }
 
-abstract class CompanyRepositoryMixin implements CompanyRepository {
+mixin CompanyRepositoryMixin implements CompanyRepository {
   @override
   late List<CompanyDto> companies;
 

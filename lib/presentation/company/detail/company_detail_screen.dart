@@ -31,7 +31,7 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
   @override
   Widget build(BuildContext context) => ViewModelBuilder.reactive(
         viewModelBuilder: () => CompanyDetailViewModel(id: widget.companyId),
-        onModelReady: (model) {
+        onViewModelReady: (model) {
           model.fetchData();
           model.getFavourite();
         },

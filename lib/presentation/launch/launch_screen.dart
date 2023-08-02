@@ -22,9 +22,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
   @override
   Widget build(BuildContext context) => ViewModelBuilder<LaunchViewModel>.reactive(
         viewModelBuilder: () => LaunchViewModel(),
-        onModelReady: (viewModel) {
-          viewModel.fetchData();
-        },
+        onViewModelReady: (viewModel) => viewModel.fetchData(),
         builder: (context, viewModel, child) => Scaffold(
           body: _buildBody(context, viewModel),
         ),

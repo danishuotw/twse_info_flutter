@@ -35,11 +35,17 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+  # Sign in
+#  flutter_facebook_auth: ^6.0.0
+#  sign_in_with_apple: ^5.0.0
+#  google_sign_in: ^6.1.4
+
   # Navigation
-  go_router: ^6.0.1
+  go_router: ^10.0.0
 
   # Architecture
-  stacked: ^2.3.8
+  stacked: ^3.4.1
+  flutter_bloc: ^8.0.0
 
   # DI
   get_it: ^7.2.0

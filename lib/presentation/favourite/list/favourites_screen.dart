@@ -23,7 +23,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
   @override
   Widget build(BuildContext context) => ViewModelBuilder.reactive(
         viewModelBuilder: () => FavouritesViewModel(),
-        onModelReady: (model) {
+        onViewModelReady: (model) {
           // model.fetchData();
           model.subscribeAllFavourite();
         },
@@ -60,6 +60,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
           confirmDismiss: (direction) async {
             final confirmed = await _confirmDismiss(direction, ' ${item.id}${item.name} ');
             if (confirmed) viewModel.removeFavourite(item.id);
+            return confirmed;
           },
           background: Container(
             color: Colors.red,
@@ -98,6 +99,6 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
   }
 
   void _navigateDetail(BuildContext context, String id) {
-    context.pushNamed(CompanyDetailScreen.route, params: {'companyId': id});
+    context.pushNamed(CompanyDetailScreen.route, pathParameters: {'companyId': id});
   }
 }
